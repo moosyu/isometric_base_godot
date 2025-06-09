@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8kr4iq5u2a70"]
+
+[ext_resource type="Script" uid="uid://dt3ut2ooq5qjx" path="res://Map/Scripts/game.gd" id="1_ff732"]
+[ext_resource type="TileSet" uid="uid://qoak0ljjq8a" path="res://Map/Resources/tileset.tres" id="2_dolgs"]
+[ext_resource type="Script" uid="uid://3aqba4ntadld" path="res://Map/Scripts/camera_movement.gd" id="3_dolgs"]
+
+[sub_resource type="Gradient" id="Gradient_ff732"]
+offsets = PackedFloat32Array(0, 0.25974, 0.545455, 0.62987, 0.707792, 1)
+colors = PackedColorArray(0.171687, 0.40397, 1, 1, 0.172549, 0.403922, 1, 1, 0.995765, 1, 0.318068, 1, 0, 0, 0, 1, 0.328638, 0.260062, 0.10962, 1, 0.119651, 0.706984, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ff732"]
+frequency = 0.044
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dolgs"]
+color_ramp = SubResource("Gradient_ff732")
+noise = SubResource("FastNoiseLite_ff732")
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ff732")
+noise_height_texture = SubResource("NoiseTexture2D_dolgs")
+
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="GroundLayer" type="TileMapLayer" parent="Layers"]
+scale = Vector2(0.3, 0.3)
+tile_set = ExtResource("2_dolgs")
+
+[node name="FoliageLayer" type="TileMapLayer" parent="Layers"]
+scale = Vector2(0.3, 0.3)
+tile_set = ExtResource("2_dolgs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_dolgs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -611.0
+offset_top = -299.0
+offset_right = -481.0
+offset_bottom = -268.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Generate edges"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
