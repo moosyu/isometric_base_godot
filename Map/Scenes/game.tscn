@@ -22,31 +22,28 @@ noise_height_texture = SubResource("NoiseTexture2D_dolgs")
 [node name="Layers" type="Node2D" parent="."]
 
 [node name="GroundLayer" type="TileMapLayer" parent="Layers"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.8, 0.8)
 tile_set = ExtResource("2_dolgs")
 
 [node name="FoliageLayer" type="TileMapLayer" parent="Layers"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.8, 0.8)
 tile_set = ExtResource("2_dolgs")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_dolgs")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
-
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="Button" type="Button" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -611.0
-offset_top = -299.0
-offset_right = -481.0
-offset_bottom = -268.0
+offset_left = 342.0
+offset_top = 239.0
+offset_right = 480.0
+offset_bottom = 270.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Generate edges"
+text = "Rearrange water"
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
